@@ -1,0 +1,17 @@
+name: SMPUtils
+version: $version
+main: me.andyreckt.smp.SMPUtils
+api-version: '1.21'
+prefix: SMP
+authors: [ AndyReckt ]
+description: Utils for the Comick SMP
+
+dependencies:
+  Towny:
+    load: BEFORE
+    required: true
+    join-classpath: true
+  TownyChat:
+    load: BEFORE
+    required: true
+    join-classpath: true
