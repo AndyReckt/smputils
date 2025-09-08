@@ -5,13 +5,11 @@ api-version: '1.21'
 prefix: SMP
 authors: [ AndyReckt ]
 description: Utils for the Comick SMP
+folia-supported: true
 
 dependencies:
-  Towny:
-    load: BEFORE
-    required: true
-    join-classpath: true
-  TownyChat:
-    load: BEFORE
-    required: true
-    join-classpath: true
+  SERVER:
+    Vault:
+      load: BEFORE
+      required: true
+      join-classpath: true
