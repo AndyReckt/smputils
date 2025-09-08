@@ -1,6 +1,7 @@
 name: SMPUtils
 version: $version
 main: me.andyreckt.smp.SMPUtils
+loader: me.andyreckt.smp.SMPLoader
 api-version: '1.21'
 prefix: SMP
 authors: [ AndyReckt ]

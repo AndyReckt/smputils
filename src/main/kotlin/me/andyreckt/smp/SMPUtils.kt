@@ -2,6 +2,7 @@ package me.andyreckt.smp
 
 import co.aikar.commands.PaperCommandManager
 import me.andyreckt.smp.config.SMPConfig
+import me.andyreckt.smp.jarvis.JarvisHandler
 import me.andyreckt.smp.mongo.MongoHandler
 import me.andyreckt.smp.profile.ProfileHandler
 import me.andyreckt.smp.profile.ProfileListener
@@ -11,6 +12,8 @@ import net.j4c0b3y.api.config.platform.bukkit.BukkitConfigHandler
 import net.milkbowl.vault.economy.Economy
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
+import java.util.logging.Level
+import java.util.logging.Logger
 
 class SMPUtils : JavaPlugin() {
 
@@ -23,6 +26,7 @@ class SMPUtils : JavaPlugin() {
     lateinit var config: SMPConfig
 
     lateinit var profileHandler: ProfileHandler
+    lateinit var jarvisHandler: JarvisHandler
 
     override fun onEnable() {
         instance = this
@@ -42,6 +46,7 @@ class SMPUtils : JavaPlugin() {
 
             loadEconomy()
             loadPvPChecks()
+            loadJarvis()
         } catch (ex: Exception) {
             this.logger.severe("Error while loading SMP Utils, ${ex.message}")
             ex.printStackTrace()
@@ -71,8 +76,17 @@ class SMPUtils : JavaPlugin() {
     }
 
     fun loadMongo() {
+        Logger.getLogger("org.mongodb").level = Level.WARNING
+        Logger.getLogger("com.mongodb").level = Level.WARNING
+        Logger.getLogger("me.andyreckt.relocations.mongodb").level = Level.WARNING
+
         mongoHandler = MongoHandler(SMPConfig.MONGO_URI)
         mongoHandler.connect()
+    }
+
+    fun loadJarvis() {
+        jarvisHandler = JarvisHandler(this, SMPConfig.OPENROUTER_API_KEY)
+        jarvisHandler.enable()
     }
 
     fun loadProfiles() {

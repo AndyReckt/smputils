@@ -46,31 +46,36 @@ dependencies {
     //vault
     compileOnly("net.milkbowl.vault:VaultUnlockedAPI:2.15")
     //google
-    implementation("com.google.code.gson:gson:2.13.1")
-    implementation("com.google.guava:guava:33.4.8-jre")
+    compileOnly("com.google.code.gson:gson:2.13.1")
+    compileOnly("com.google.guava:guava:33.4.8-jre")
     //configapi
-    implementation("net.j4c0b3y:ConfigAPI-bukkit:1.2.6")
+    compileOnly("net.j4c0b3y:ConfigAPI-bukkit:1.2.6")
     //mongodb
-    implementation("org.mongodb:mongodb-driver-reactivestreams:5.1.2")
-    implementation("io.projectreactor:reactor-core:3.6.8")
-    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions:1.3.0-RC1")
+    compileOnly("org.mongodb:mongodb-driver-reactivestreams:5.1.2")
+    compileOnly("io.projectreactor:reactor-core:3.6.8")
+    compileOnly("io.projectreactor.kotlin:reactor-kotlin-extensions:1.3.0-RC1")
     //acf
-    implementation("co.aikar:acf-paper:0.5.1-SNAPSHOT")
+    compileOnly("co.aikar:acf-paper:0.5.1-SNAPSHOT")
+    //okhttp
+    compileOnly("com.squareup.okhttp3:okhttp:4.12.0")
+    compileOnly("com.squareup.okhttp3:logging-interceptor:4.12.0")
 }
 
 tasks.shadowJar {
-    relocate("co.aikar.commands", "me.andyreckt.reloactions.acf")
-    relocate("co.aikar.locales", "me.andyreckt.reloactions.locales")
-
-    relocate("com.google.gson", "me.andyreckt.reloactions.gson")
-    relocate("com.google.common", "me.andyreckt.reloactions.guava")
-    relocate("org.bson", "me.andyreckt.reloactions.bson")
-    relocate("com.mongodb", "me.andyreckt.reloactions.mongodb")
-    relocate("org.reactivestreams", "me.andyreckt.reloactions.reactive")
-    relocate("reactor", "me.andyreckt.reloactions.reactor")
-
-    relocate("net.j4c0b3y", "me.andyreckt.reloactions.jacob")
-    relocate("dev.dejvokep", "me.andyreckt.reloactions.dejvokep")
+//    relocate("co.aikar.commands", "me.andyreckt.relocations.acf")
+//    relocate("co.aikar.locales", "me.andyreckt.relocations.locales")
+//
+//    relocate("com.google.gson", "me.andyreckt.relocations.gson")
+//    relocate("com.google.common", "me.andyreckt.relocations.guava")
+//    relocate("org.bson", "me.andyreckt.relocations.bson")
+//    relocate("com.mongodb", "me.andyreckt.relocations.mongodb")
+//    relocate("org.reactivestreams", "me.andyreckt.relocations.reactive")
+//    relocate("reactor", "me.andyreckt.relocations.reactor")
+//
+//    relocate("net.j4c0b3y", "me.andyreckt.relocations.jacob")
+//    relocate("dev.dejvokep", "me.andyreckt.relocations.dejvokep")
+//
+//    relocate("okhttp3", "me.andyreckt.relocations.okhttp")
 }
 
 tasks {
@@ -121,7 +126,7 @@ tasks.processResources {
         val gitCommitId = gitProps["git.commit.id.abbrev"] ?: "unknown"
         val gitCommitTime = gitProps["git.commit.time"] ?: "unknown"
         val gitBranch = gitProps["git.branch"] ?: "unknown"
-        val fullVersion = "$version-$gitCommitId-${gitCommitTime.replace(":", "-")}"
+        val fullVersion = "$version-$gitBranch-$gitCommitId"
 
         val props = mapOf(
             "baseVersion" to version,

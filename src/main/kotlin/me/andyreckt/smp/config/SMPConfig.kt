@@ -6,6 +6,7 @@ import java.io.File
 
 class SMPConfig(plugin: SMPUtils) : StaticConfig(File(plugin.dataFolder, "config.yml"), plugin.configHandler) {
     companion object {
-        @JvmStatic val MONGO_URI = "mongodb://localhost:27017"
+        @JvmStatic var MONGO_URI = "mongodb://localhost:27017"
+        @JvmStatic var OPENROUTER_API_KEY = ""
     }
 }
